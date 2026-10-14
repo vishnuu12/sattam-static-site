@@ -271,6 +271,16 @@
     });
   }
 
+  function initQuickExit() {
+    document.addEventListener('click', function (ev) {
+      if (!ev.target.closest('[data-quick-exit]')) return;
+      ev.preventDefault();
+      try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
+      document.title = 'Weather';
+      location.replace('https://www.google.com/search?q=today+weather');
+    });
+  }
+
   function initShareImage() {
     document.addEventListener('click', function (ev) {
       var b = ev.target.closest('[data-share-image]');
@@ -372,6 +382,7 @@
     initSave();
     initShare();
     initShareImage();
+    initQuickExit();
     initSearch();
     initPrint();
     initSW();
