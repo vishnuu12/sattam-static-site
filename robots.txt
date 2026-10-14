@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vishnuu12.github.io/sattam-static-site/sitemap.xml
