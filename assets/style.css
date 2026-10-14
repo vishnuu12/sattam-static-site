@@ -330,6 +330,20 @@ p { margin: 0 0 1em; }
 .btn-gold { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #3a2600; box-shadow: 0 8px 22px rgba(232, 163, 61, .38); }
 .btn-gold:hover { box-shadow: 0 12px 28px rgba(232, 163, 61, .55); }
 
+/* ---------- quick exit / safety ---------- */
+.tool-exit { color: #b3362a; border-color: #e3b6b0; }
+.tool-exit:hover { background: #fdeeee; color: #8f2419; border-color: #cf7d73; }
+.btn-danger { background: linear-gradient(135deg, #e8623c, #bf3a2b); color: #fff; }
+.safety-banner { background: #fdeeee; border: 1px solid #f2c9c3; border-left: 6px solid #bf3a2b; border-radius: var(--radius); padding: 16px 20px; margin: 16px 0 20px; }
+.sb-h { font-weight: 800; color: #8f2419; margin: 0 0 8px; font-family: var(--font-ta-head); }
+.safety-banner .pair-list { margin: 0; }
+.sb-actions { margin: 12px 0 0; }
+.sb-note { margin: 12px 0 0; font-size: .88rem; color: #7a3b33; }
+[data-theme="dark"] .safety-banner { background: #2a1616; border-color: #4a2626; }
+[data-theme="dark"] .sb-h { color: #f2b8b8; }
+[data-theme="dark"] .sb-note { color: #d9a9a3; }
+[data-theme="dark"] .tool-exit { color: #f0a79c; border-color: #5c3230; }
+
 /* ---------- what to carry checklists ---------- */
 .carry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; align-items: start; }
 .carry-box { margin: 0; }
