@@ -149,11 +149,66 @@
     });
   }
 
+  function initSpeak() {
+    if (!('speechSynthesis' in window)) return;
+    var synth = window.speechSynthesis;
+    var taVoice = null;
+    function pickVoice() {
+      var vs = synth.getVoices() || [];
+      for (var i = 0; i < vs.length; i++) { if (/^ta([-_]|$)/i.test(vs[i].lang)) { taVoice = vs[i]; return; } }
+    }
+    pickVoice();
+    if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = pickVoice;
+
+    function speak(text) {
+      if (!text) return;
+      synth.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ta-IN';
+      if (taVoice) u.voice = taVoice;
+      u.rate = 0.9;
+      synth.speak(u);
+    }
+
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-speak]');
+      if (b) { ev.preventDefault(); speak(b.getAttribute('data-speak')); return; }
+      if (ev.target.closest('[data-stop]')) { ev.preventDefault(); synth.cancel(); }
+    });
+  }
+
+  function initMic() {
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-mic]');
+      if (!b) return;
+      ev.preventDefault();
+      if (!SR) { window.alert('Voice search is not supported in this browser. Please type your question.'); return; }
+      var input = document.getElementById(b.getAttribute('data-mic'));
+      var rec = new SR();
+      rec.lang = 'ta-IN';
+      rec.interimResults = false;
+      rec.maxAlternatives = 1;
+      b.classList.add('is-listening');
+      rec.onresult = function (e) {
+        var text = e.results[0][0].transcript;
+        if (input) { input.value = text; input.dispatchEvent(new Event('input', { bubbles: true })); }
+        var form = b.closest('form');
+        if (form && !form.id) { try { form.submit(); } catch (err) {} }
+      };
+      rec.onerror = function () { b.classList.remove('is-listening'); };
+      rec.onend = function () { b.classList.remove('is-listening'); };
+      try { rec.start(); } catch (err) { b.classList.remove('is-listening'); }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMenu();
     initSearch();
     initPrint();
     initSW();
     initPrefs();
+    initSpeak();
+    initMic();
   });
 })();
