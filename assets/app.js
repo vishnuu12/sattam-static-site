@@ -118,10 +118,42 @@
     });
   }
 
+  function initPrefs() {
+    var root = document.documentElement;
+
+    var level = parseInt(localStorage.getItem('sattam-font') || '0', 10);
+    if (isNaN(level)) level = 0;
+    function applyFont() { root.style.fontSize = (100 + level * 8) + '%'; }
+    applyFont();
+    Array.prototype.forEach.call(document.querySelectorAll('[data-font]'), function (b) {
+      b.addEventListener('click', function () {
+        level = Math.min(3, Math.max(-1, level + parseInt(b.getAttribute('data-font'), 10)));
+        try { localStorage.setItem('sattam-font', String(level)); } catch (e) {}
+        applyFont();
+      });
+    });
+
+    var tb = document.querySelector('[data-theme-toggle]');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    function applyTheme(th) {
+      root.setAttribute('data-theme', th);
+      if (tb) tb.textContent = th === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+    }
+    var savedTheme = null;
+    try { savedTheme = localStorage.getItem('sattam-theme'); } catch (e) {}
+    applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+    if (tb) tb.addEventListener('click', function () {
+      var th = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('sattam-theme', th); } catch (e) {}
+      applyTheme(th);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMenu();
     initSearch();
     initPrint();
     initSW();
+    initPrefs();
   });
 })();
