@@ -272,6 +272,55 @@
     });
   }
 
+  var SAVED_KEY = 'sattam-saved';
+  function getSaved() {
+    try { return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]') || []; } catch (e) { return []; }
+  }
+  function setSaved(list) { try { localStorage.setItem(SAVED_KEY, JSON.stringify(list)); } catch (e) {} }
+  function renderSaved() {
+    var list = document.getElementById('savedlist');
+    if (!list) return;
+    var items = getSaved();
+    var empty = document.getElementById('savedempty');
+    var actions = document.getElementById('savedactions');
+    if (empty) empty.hidden = items.length !== 0;
+    if (actions) actions.hidden = items.length === 0;
+    list.innerHTML = items.map(function (it) {
+      return '<a class="card" href="' + it.url + '"><span class="card-emj" aria-hidden="true">' + (it.emoji || '\uD83D\uDCD6') + '</span><span class="card-title"><span class="ta" lang="ta">' + esc(it.ta || '') + '</span><span class="en" lang="en">' + esc(it.en || '') + '</span></span></a>';
+    }).join('');
+  }
+  function initBookmarks() {
+    var saved = getSaved();
+    Array.prototype.forEach.call(document.querySelectorAll('[data-bookmark]'), function (b) {
+      var slug = b.getAttribute('data-slug');
+      var hit = saved.some(function (s) { return s.slug === slug; });
+      if (hit) { b.classList.add('is-saved'); b.textContent = '\u2713'; }
+    });
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-bookmark]');
+      if (b) {
+        ev.preventDefault();
+        var slug = b.getAttribute('data-slug');
+        var list = getSaved();
+        var i = -1;
+        for (var k = 0; k < list.length; k++) if (list[k].slug === slug) { i = k; break; }
+        if (i === -1) {
+          list.push({ slug: slug, ta: b.getAttribute('data-title'), en: b.getAttribute('data-title-en'), url: b.getAttribute('data-url'), emoji: b.getAttribute('data-emoji') });
+          b.classList.add('is-saved'); b.textContent = '\u2713';
+        } else {
+          list.splice(i, 1);
+          b.classList.remove('is-saved'); b.textContent = '\uD83D\uDD16';
+        }
+        setSaved(list);
+        return;
+      }
+      if (ev.target.closest('[data-clear-saved]')) {
+        ev.preventDefault(); setSaved([]); renderSaved();
+      }
+    });
+    renderSaved();
+  }
+
   function initCopy() {
     document.addEventListener('click', function (ev) {
       var b = ev.target.closest('[data-copy]');
@@ -399,6 +448,7 @@
     initShareImage();
     initQuickExit();
     initCopy();
+    initBookmarks();
     initSearch();
     initPrint();
     initSW();
