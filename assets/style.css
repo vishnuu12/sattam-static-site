@@ -97,8 +97,9 @@ p { margin: 0 0 1em; }
 }
 .brand-text .ta { font-size: 1.32rem; color: var(--brand); line-height: 1.2; }
 .brand-text .en { font-family: var(--font-head-en); font-weight: 700; font-size: .76rem; color: var(--ink-soft); margin-top: 0; letter-spacing: .04em; }
-.nav { display: flex; gap: 4px; margin-inline-start: auto; }
-.nav a { text-decoration: none; padding: 10px 14px; border-radius: 12px; display: block; transition: background .15s ease, transform .15s ease; }
+.nav { display: flex; gap: 2px; margin-inline-start: auto; flex-wrap: wrap; justify-content: flex-end; }
+.nav a .ta, .nav a .en { white-space: nowrap; }
+.nav a { text-decoration: none; padding: 9px 11px; border-radius: 12px; display: block; transition: background .15s ease, transform .15s ease; }
 .nav a .ta { font-size: 1.02rem; color: var(--ink-soft); line-height: 1.25; }
 .nav a .en { font-size: .7rem; margin-top: 0; }
 .nav a:hover { background: var(--surface); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
@@ -325,6 +326,20 @@ p { margin: 0 0 1em; }
 .foot-bottom .ta { font-size: .9rem; color: #c3d5c9; }
 .foot-bottom .en { font-size: .8rem; color: #9fb8aa; }
 .foot-meta { color: #9fb8aa; font-size: .82rem; font-family: var(--font-en); }
+
+/* ---------- reference tables (glossary, deadlines) ---------- */
+.ref-wrap { overflow-x: auto; margin: 22px 0; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); background: var(--surface); }
+.ref-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 560px; }
+.ref-table th, .ref-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ref-table th { background: linear-gradient(180deg, #f2f7f3, #eaf1ec); position: sticky; top: 0; }
+.ref-table th .ta { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
+.ref-table th .en { font-size: .68rem; margin-top: 0; text-transform: uppercase; }
+.ref-table tbody tr:nth-child(even) { background: #fbfaf6; }
+.ref-table tbody tr:hover { background: #f1f7f3; }
+.ref-table td:first-child .ta { font-weight: 700; color: var(--brand); }
+.ref-table td .ta { line-height: 1.7; }
+.ref-table td .en { font-size: .82rem; }
+.ref-table tr:last-child td { border-bottom: 0; }
 
 /* ---------- templates / letters ---------- */
 .letter-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin: 16px 0; box-shadow: var(--shadow-sm); }
