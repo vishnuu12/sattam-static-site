@@ -330,6 +330,24 @@ p { margin: 0 0 1em; }
 .btn-gold { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #3a2600; box-shadow: 0 8px 22px rgba(232, 163, 61, .38); }
 .btn-gold:hover { box-shadow: 0 12px 28px rgba(232, 163, 61, .55); }
 
+/* ---------- help near you ---------- */
+.nm-state { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 8px; }
+.nm-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 16px; }
+.nm-lab .ta { font-weight: 600; }
+.nm-lab .en { font-size: .82rem; }
+.nm-tel { font-family: var(--font-en); font-weight: 700; color: var(--brand-2); text-decoration: none; white-space: nowrap; }
+.nm-tel:hover { text-decoration: underline; }
+.nm-filter { width: 100%; max-width: 420px; padding: 13px 16px; font-size: 1rem; border: 1px solid var(--line-2); border-radius: 12px; background: var(--surface); color: var(--ink); margin: 6px 0 16px; }
+.nm-none { color: var(--ink-soft); font-style: italic; }
+.nm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.nm-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 16px; box-shadow: var(--shadow-sm); }
+.nm-card[hidden] { display: none; }
+.nm-name { margin: 0 0 10px; }
+.nm-name .ta { font-weight: 700; color: var(--brand); }
+.nm-name .en { font-size: .85rem; }
+.nm-link { display: block; font-size: .9rem; color: var(--ink-soft); text-decoration: none; padding: 4px 0; }
+.nm-link:hover { color: var(--brand-2); }
+
 /* ---------- "what happened?" wizard ---------- */
 .wizard { display: grid; gap: 12px; margin: 20px 0; }
 .wz-area { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden; }
@@ -381,6 +399,8 @@ p { margin: 0 0 1em; }
 [data-theme="dark"] .letter { background: var(--surface-2); }
 [data-theme="dark"] .read-btn { background: var(--surface-2); }
 [data-theme="dark"] .wz-area, [data-theme="dark"] .wz-sit { background: var(--surface); }
+[data-theme="dark"] .nm-name .ta { color: var(--accent-2); }
+[data-theme="dark"] .nm-tel { color: var(--accent-2); }
 [data-theme="dark"] .wz-sit { background: var(--bg-2); }
 [data-theme="dark"] .wz-area[open] > summary { background: var(--surface-2); }
 [data-theme="dark"] .helpline th, [data-theme="dark"] .ref-table th { background: #1b2721; }

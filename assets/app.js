@@ -202,8 +202,27 @@
     });
   }
 
+  function initDistrictFilter() {
+    var q = document.getElementById('nmq');
+    var grid = document.getElementById('nmgrid');
+    if (!q || !grid) return;
+    var none = document.getElementById('nmnone');
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.nm-card'));
+    q.addEventListener('input', function () {
+      var t = q.value.toLowerCase().trim();
+      var shown = 0;
+      cards.forEach(function (c) {
+        var hit = !t || (c.getAttribute('data-name') || '').indexOf(t) !== -1;
+        c.hidden = !hit;
+        if (hit) shown++;
+      });
+      if (none) none.hidden = shown !== 0;
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMenu();
+    initDistrictFilter();
     initSearch();
     initPrint();
     initSW();
