@@ -123,7 +123,8 @@
 
     var level = parseInt(localStorage.getItem('sattam-font') || '0', 10);
     if (isNaN(level)) level = 0;
-    function applyFont() { root.style.fontSize = (100 + level * 8) + '%'; }
+    var BASE_PX = 17.5;
+    function applyFont() { root.style.fontSize = (BASE_PX * (1 + level * 0.09)).toFixed(1) + 'px'; }
     applyFont();
     Array.prototype.forEach.call(document.querySelectorAll('[data-font]'), function (b) {
       b.addEventListener('click', function () {
