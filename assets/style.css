@@ -518,3 +518,22 @@ p { margin: 0 0 1em; }
   body.print-one .letter-box:not(.printing) { display: none !important; }
   body.print-one .letter { border: 0; padding: 0; background: #fff; }
 }
+
+/* ---------- larger text and bigger tap targets (older and first-time readers) ---------- */
+:root { font-size: 17.5px; }
+.btn { min-height: 48px; padding: 14px 22px; }
+.btn-sm { min-height: 42px; }
+.tool-btn { min-width: 46px; min-height: 46px; }
+.nav a { padding: 12px 13px; }
+.tile-emj { font-size: 2.2rem; width: 64px; height: 64px; }
+.card-emj { font-size: 2rem; width: 58px; height: 58px; }
+.sit-emj { font-size: 2.1rem; }
+.wz-emj { font-size: 1.9rem; }
+.nm-tel { padding: 6px 2px; }
+.src-list a, .helpline a { display: inline-block; padding: 4px 0; }
+.pop a { padding: 7px 0; display: inline-block; }
+.carry-items li { margin: 13px 0; }
+@media (max-width: 860px) {
+  .btn { min-height: 50px; }
+  .tool-btn { min-width: 48px; min-height: 48px; }
+}
