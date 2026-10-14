@@ -207,6 +207,8 @@ p { margin: 0 0 1em; }
 .card::after { content: ''; position: absolute; inset: auto 0 0 0; height: 4px; background: linear-gradient(90deg, var(--brand-2), var(--accent-2)); transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: transparent; }
 .card:hover::after { transform: scaleX(1); }
+.card::before { content: '\2197'; position: absolute; top: 16px; right: 18px; color: var(--line-2); font-size: 1.1rem; transition: color .18s ease, transform .18s ease; }
+.card:hover::before { color: var(--accent); transform: translate(2px, -2px); }
 .card-emj { font-size: 1.6rem; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: linear-gradient(135deg, #e9f5ef, #f8efe0); }
 .card-cat { margin-top: 12px; }
 .card-cat .ta { font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); font-weight: 700; }
