@@ -330,6 +330,18 @@ p { margin: 0 0 1em; }
 .btn-gold { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #3a2600; box-shadow: 0 8px 22px rgba(232, 163, 61, .38); }
 .btn-gold:hover { box-shadow: 0 12px 28px rgba(232, 163, 61, .55); }
 
+/* ---------- what to carry checklists ---------- */
+.carry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; align-items: start; }
+.carry-box { margin: 0; }
+.carry-en { font-size: .85rem; color: var(--ink-soft); margin: 0 0 12px; }
+.carry-items { list-style: none; padding: 0; margin: 0; }
+.carry-items li { position: relative; padding-inline-start: 30px; margin: 10px 0; }
+.carry-items li::before { content: ''; position: absolute; left: 0; top: 4px; width: 15px; height: 15px; border: 2px solid var(--brand-2); border-radius: 4px; }
+.carry-items .ta { display: block; line-height: 1.65; }
+.carry-items .en { font-size: .82rem; }
+.carry-note { margin: 14px 0 0; padding-top: 10px; border-top: 1px dashed var(--line-2); font-size: .9rem; color: var(--ink-soft); }
+@media print { .carry-items li::before { border-color: #333; } }
+
 /* ---------- key points box ---------- */
 .keybox { background: linear-gradient(180deg, #fffaf0, #fdf6e6); border: 1px solid var(--accent-line, #f0dcb4); border-left: 6px solid var(--accent); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0 20px; box-shadow: var(--shadow-sm); }
 .keybox-h { font-weight: 800; color: #7a5200; margin: 0 0 10px; font-family: var(--font-ta-head); }
