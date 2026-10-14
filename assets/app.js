@@ -96,8 +96,24 @@
     reset.addEventListener('click', function () { qEl.value = ''; cEl.value = ''; render(); });
   }
 
+  function initPrint() {
+    document.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('[data-print]');
+      if (!btn) return;
+      var box = btn.closest('.letter-box');
+      if (box) box.classList.add('printing');
+      document.body.classList.add('print-one');
+      window.print();
+      setTimeout(function () {
+        document.body.classList.remove('print-one');
+        if (box) box.classList.remove('printing');
+      }, 600);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMenu();
     initSearch();
+    initPrint();
   });
 })();
