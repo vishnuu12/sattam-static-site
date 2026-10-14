@@ -331,6 +331,10 @@ p { margin: 0 0 1em; }
 .btn-gold:hover { box-shadow: 0 12px 28px rgba(232, 163, 61, .55); }
 
 /* ---------- help near you ---------- */
+.rv-link { grid-column: 1 / -1; }
+.rv-link a { color: var(--brand-2); font-weight: 600; text-decoration: none; font-size: .92rem; }
+.rv-link a:hover { text-decoration: underline; }
+
 .tel-link { color: var(--brand-2); font-weight: 700; text-decoration: none; font-family: var(--font-en); white-space: nowrap; }
 .tel-link:hover { text-decoration: underline; }
 .btn.is-saved { background: var(--brand-3); color: #fff; border-color: var(--brand-3); }
