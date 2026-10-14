@@ -272,6 +272,20 @@
     });
   }
 
+  function initCopy() {
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-copy]');
+      if (!b) return;
+      ev.preventDefault();
+      var text = b.getAttribute('data-copy') || '';
+      var old = b.textContent;
+      function ok() { b.textContent = '\u2713'; setTimeout(function () { b.textContent = old; }, 1500); }
+      if (navigator.clipboard) { navigator.clipboard.writeText(text).then(ok).catch(function () {}); return; }
+      var i = b.parentNode.querySelector('input');
+      if (i) { i.select(); try { document.execCommand('copy'); ok(); } catch (e) {} }
+    });
+  }
+
   function initQuickExit() {
     document.addEventListener('click', function (ev) {
       if (!ev.target.closest('[data-quick-exit]')) return;
@@ -384,6 +398,7 @@
     initShare();
     initShareImage();
     initQuickExit();
+    initCopy();
     initSearch();
     initPrint();
     initSW();
