@@ -111,9 +111,17 @@
     });
   }
 
+  function initSW() {
+    if (!('serviceWorker' in navigator)) return;
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register(base() + '/sw.js').catch(function () {});
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMenu();
     initSearch();
     initPrint();
+    initSW();
   });
 })();
