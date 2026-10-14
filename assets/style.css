@@ -330,6 +330,15 @@ p { margin: 0 0 1em; }
 .btn-gold { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #3a2600; box-shadow: 0 8px 22px rgba(232, 163, 61, .38); }
 .btn-gold:hover { box-shadow: 0 12px 28px rgba(232, 163, 61, .55); }
 
+/* ---------- key points box ---------- */
+.keybox { background: linear-gradient(180deg, #fffaf0, #fdf6e6); border: 1px solid var(--accent-line, #f0dcb4); border-left: 6px solid var(--accent); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0 20px; box-shadow: var(--shadow-sm); }
+.keybox-h { font-weight: 800; color: #7a5200; margin: 0 0 10px; font-family: var(--font-ta-head); }
+.keybox .pair-list { margin: 0; }
+.keybox .pair-list li { margin: 8px 0; }
+.keybox .pair-list .ta { font-weight: 600; }
+[data-theme="dark"] .keybox { background: var(--surface-2); border-color: var(--line); border-left-color: var(--accent); }
+[data-theme="dark"] .keybox-h { color: var(--accent-2); }
+
 /* ---------- help near you ---------- */
 .rv-link { grid-column: 1 / -1; }
 .rv-link a { color: var(--brand-2); font-weight: 600; text-decoration: none; font-size: .92rem; }
