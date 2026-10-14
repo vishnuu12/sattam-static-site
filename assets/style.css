@@ -330,6 +330,16 @@ p { margin: 0 0 1em; }
 .btn-gold { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #3a2600; box-shadow: 0 8px 22px rgba(232, 163, 61, .38); }
 .btn-gold:hover { box-shadow: 0 12px 28px rgba(232, 163, 61, .55); }
 
+/* ---------- share & print ---------- */
+.share-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; align-items: start; margin: 20px 0; }
+@media (max-width: 860px) { .share-grid { grid-template-columns: 1fr; } }
+.poster-img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; display: block; }
+.qr-img { width: 190px; height: 190px; image-rendering: pixelated; border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 8px; }
+.share-copy { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 12px 0 0; }
+.share-url { flex: 1 1 220px; min-width: 0; padding: 11px 14px; border: 1px solid var(--line-2); border-radius: 10px; font-family: var(--font-en); font-size: .9rem; background: var(--surface-2); color: var(--ink); }
+.share-hint { margin: 14px 0 0; font-size: .9rem; color: var(--ink-soft); }
+@media print { .poster-img { width: 100%; border: 0; } }
+
 /* ---------- quick exit / safety ---------- */
 .tool-exit { color: #b3362a; border-color: #e3b6b0; }
 .tool-exit:hover { background: #fdeeee; color: #8f2419; border-color: #cf7d73; }
