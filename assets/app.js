@@ -271,6 +271,82 @@
     });
   }
 
+  function initShareImage() {
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-share-image]');
+      if (!b) return;
+      ev.preventDefault();
+      var ta = b.getAttribute('data-ta') || '';
+      var en = b.getAttribute('data-en') || '';
+      var pt = b.getAttribute('data-point') || '';
+      var url = b.getAttribute('data-url') || location.href;
+      var W = 1080, H = 1350, pad = 80;
+      var c = document.createElement('canvas'); c.width = W; c.height = H;
+      var x = c.getContext('2d');
+      function wrap(text, font, maxW) {
+        x.font = font;
+        var words = (text || '').split(' '), lines = [], cur = '';
+        words.forEach(function (w) {
+          var t = (cur + ' ' + w).trim();
+          if (x.measureText(t).width <= maxW || !cur) cur = t; else { lines.push(cur); cur = w; }
+        });
+        if (cur) lines.push(cur);
+        return lines;
+      }
+      function roundRect(x0, y0, w, h, r) {
+        x.beginPath(); x.moveTo(x0 + r, y0);
+        x.arcTo(x0 + w, y0, x0 + w, y0 + h, r); x.arcTo(x0 + w, y0 + h, x0, y0 + h, r);
+        x.arcTo(x0, y0 + h, x0, y0, r); x.arcTo(x0, y0, x0 + w, y0, r); x.closePath();
+      }
+      function draw() {
+        var g = x.createLinearGradient(0, 0, 0, H);
+        g.addColorStop(0, '#0e4d3a'); g.addColorStop(1, '#082a20');
+        x.fillStyle = g; x.fillRect(0, 0, W, H);
+        x.fillStyle = '#e8a33d'; x.fillRect(0, 0, 16, H);
+        var maxW = W - pad * 2, y = 240;
+        x.fillStyle = '#e8a33d'; x.font = '600 36px "Noto Sans Tamil", sans-serif';
+        x.fillText('\u0b9a\u0b9f\u0bcd\u0b9f\u0bae\u0bcd \u00b7 Sattam', pad, 130);
+        x.fillStyle = '#ffffff';
+        var f1 = '800 68px "Noto Sans Tamil", sans-serif';
+        wrap(ta, f1, maxW).slice(0, 4).forEach(function (l) { x.font = f1; x.fillText(l, pad, y); y += 86; });
+        y += 24;
+        x.fillStyle = '#c6ded0';
+        var f2 = '600 40px "Noto Sans Tamil", sans-serif';
+        wrap(en, f2, maxW).slice(0, 3).forEach(function (l) { x.font = f2; x.fillText(l, pad, y); y += 54; });
+        if (pt) {
+          y += 50;
+          x.fillStyle = 'rgba(255,255,255,0.10)';
+          roundRect(pad, y, maxW, 330, 26); x.fill();
+          x.fillStyle = '#ffffff';
+          var f3 = '600 44px "Noto Sans Tamil", sans-serif';
+          var yy = y + 82;
+          wrap(pt, f3, maxW - 80).slice(0, 5).forEach(function (l) { x.font = f3; x.fillText(l, pad + 40, yy); yy += 60; });
+        }
+        x.fillStyle = '#e8a33d'; x.font = '700 34px sans-serif';
+        x.fillText('sattam \u00b7 free legal guides', pad, H - 96);
+        x.fillStyle = '#9fb8aa'; x.font = '400 28px sans-serif';
+        x.fillText(url.replace(/^https?:\/\//, ''), pad, H - 50);
+      }
+      function done() {
+        draw();
+        c.toBlob(function (blob) {
+          if (!blob) return;
+          var file = null;
+          try { file = new File([blob], 'sattam.png', { type: 'image/png' }); } catch (e) { file = null; }
+          if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({ files: [file], title: en, text: en }).catch(function () {});
+            return;
+          }
+          var a = document.createElement('a');
+          a.href = URL.createObjectURL(blob); a.download = 'sattam.png';
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+        }, 'image/png');
+      }
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(done); else done();
+    });
+  }
+
   function initDistrictFilter() {
     var q = document.getElementById('nmq');
     var grid = document.getElementById('nmgrid');
@@ -295,6 +371,7 @@
     initAutoTel();
     initSave();
     initShare();
+    initShareImage();
     initSearch();
     initPrint();
     initSW();
